@@ -20,9 +20,9 @@ public class Zoo extends Auditable {
     @JsonIgnoreProperties("zoo")
     private Set<Telephone> phonenumbers = new HashSet<>();
 
-    @OneToMany(mappedBy = "zoo", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("zoo")
-    private Set<ZooAnimals> animals = new HashSet<>();
+    @ManyToMany(mappedBy = "zoos")
+    @JsonIgnoreProperties("zoos")
+    private Set<Animal> animals = new HashSet<>();
 
     public Zoo() {
     }
@@ -55,11 +55,11 @@ public class Zoo extends Auditable {
         this.phonenumbers = phonenumbers;
     }
 
-    public Set<ZooAnimals> getAnimals() {
+    public Set<Animal> getAnimals() {
         return animals;
     }
 
-    public void setAnimals(Set<ZooAnimals> animals) {
+    public void setAnimals(Set<Animal> animals) {
         this.animals = animals;
     }
 }

@@ -54,8 +54,8 @@ public class ZooAnimals extends Auditable implements Serializable {
         return zoo.getZooname();
     }
 
-    public void setIncomingzoo() {
-        this.incomingzoo = zoo.getZooname();
+    public void setIncomingzoo(Zoo zoo) {
+        this.incomingzoo = zoo.getZooname() ;
     }
 
     @Override

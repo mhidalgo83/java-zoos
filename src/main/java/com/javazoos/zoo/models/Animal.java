@@ -16,13 +16,12 @@ public class Animal extends Auditable{
 
     @Column(nullable = false, unique = true)
     private String animaltype;
-
-    @Column
     private String incomingzoo;
 
-    @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties("animal")
-    private Set<ZooAnimals> zooanimals = new HashSet<>();
+
+    @ManyToMany
+    @JoinTable(name = "zooanimals", joinColumns = @JoinColumn(name = "animalid"), inverseJoinColumns = @JoinColumn(name = "zooid"))
+    private Set<Zoo> zoos = new HashSet<>();
 
     public Animal() {
     }
@@ -30,6 +29,7 @@ public class Animal extends Auditable{
     public Animal(String animaltype, String incomingzoo) {
         this.animaltype = animaltype;
         this.incomingzoo = incomingzoo;
+
     }
 
     public long getAnimalid() {
@@ -56,11 +56,11 @@ public class Animal extends Auditable{
         this.incomingzoo = incomingzoo;
     }
 
-    public Set<ZooAnimals> getZooanimals() {
-        return zooanimals;
-    }
-
-    public void setZooanimals(Set<ZooAnimals> zooanimals) {
-        this.zooanimals = zooanimals;
-    }
+    //    public Set<ZooAnimals> getZooanimals() {
+//        return zooanimals;
+//    }
+//
+//    public void setZooanimals(Set<ZooAnimals> zooanimals) {
+//        this.zooanimals = zooanimals;
+//    }
 }
