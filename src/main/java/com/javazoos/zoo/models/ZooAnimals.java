@@ -12,22 +12,26 @@ import java.util.Objects;
 public class ZooAnimals extends Auditable implements Serializable {
     @Id
     @ManyToOne
-    @JsonIgnoreProperties(value = "animals")
+    @JsonIgnoreProperties("animals")
     @JoinColumn(name = "zooid")
     private Zoo zoo;
 
     @Id
     @ManyToOne
-    @JsonIgnoreProperties(value = "zoos")
+    @JsonIgnoreProperties("zoos")
     @JoinColumn(name = "animalid")
     private Animal animal;
+
+    @Column
+    private String incomingzoo;
 
     public ZooAnimals() {
     }
 
-    public ZooAnimals(Zoo zoo, Animal animal) {
+    public ZooAnimals(Zoo zoo, Animal animal, String incomingzoo) {
         this.zoo = zoo;
         this.animal = animal;
+        this.incomingzoo = incomingzoo;
     }
 
     public Zoo getZoo() {
@@ -44,6 +48,14 @@ public class ZooAnimals extends Auditable implements Serializable {
 
     public void setAnimal(Animal animal) {
         this.animal = animal;
+    }
+
+    public String getIncomingzoo() {
+        return zoo.getZooname();
+    }
+
+    public void setIncomingzoo() {
+        this.incomingzoo = zoo.getZooname();
     }
 
     @Override

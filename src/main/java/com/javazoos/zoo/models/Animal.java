@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "animals")
-public class Animal {
+public class Animal extends Auditable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,16 +17,19 @@ public class Animal {
     @Column(nullable = false, unique = true)
     private String animaltype;
 
+    @Column
+    private String incomingzoo;
+
     @OneToMany(mappedBy = "animal", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnoreProperties(value = "animal")
-    private Set<ZooAnimal> zooanimals = new HashSet<>();
+    @JsonIgnoreProperties("animal")
+    private Set<ZooAnimals> zooanimals = new HashSet<>();
 
     public Animal() {
     }
 
-    public Animal(long animalid, String animaltype) {
-        this.animalid = animalid;
+    public Animal(String animaltype, String incomingzoo) {
         this.animaltype = animaltype;
+        this.incomingzoo = incomingzoo;
     }
 
     public long getAnimalid() {
@@ -45,11 +48,19 @@ public class Animal {
         this.animaltype = animaltype;
     }
 
-    public Set<ZooAnimal> getZooanimals() {
+    public String getIncomingzoo() {
+        return incomingzoo;
+    }
+
+    public void setIncomingzoo(String incomingzoo) {
+        this.incomingzoo = incomingzoo;
+    }
+
+    public Set<ZooAnimals> getZooanimals() {
         return zooanimals;
     }
 
-    public void setZooanimals(Set<ZooAnimal> zooanimals) {
+    public void setZooanimals(Set<ZooAnimals> zooanimals) {
         this.zooanimals = zooanimals;
     }
 }

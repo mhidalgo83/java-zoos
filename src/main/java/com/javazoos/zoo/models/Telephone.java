@@ -8,7 +8,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "telephones")
-public class Telephone {
+public class Telephone extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,15 +21,47 @@ public class Telephone {
 
     @ManyToOne
     @JoinColumn(name = "zooid")
+    @JsonIgnoreProperties("telephones")
     private Zoo zoo;
 
     public Telephone() {
     }
 
-    public Telephone(long phoneid, String phonenumber, String phonetype, Zoo zoo) {
-        this.phoneid = phoneid;
+    public Telephone(String phonenumber, String phonetype, Zoo zoo) {
         this.phonenumber = phonenumber;
         this.phonetype = phonetype;
+        this.zoo = zoo;
+    }
+
+    public long getPhoneid() {
+        return phoneid;
+    }
+
+    public void setPhoneid(long phoneid) {
+        this.phoneid = phoneid;
+    }
+
+    public String getPhonenumber() {
+        return phonenumber;
+    }
+
+    public void setPhonenumber(String phonenumber) {
+        this.phonenumber = phonenumber;
+    }
+
+    public String getPhonetype() {
+        return phonetype;
+    }
+
+    public void setPhonetype(String phonetype) {
+        this.phonetype = phonetype;
+    }
+
+    public Zoo getZoo() {
+        return zoo;
+    }
+
+    public void setZoo(Zoo zoo) {
         this.zoo = zoo;
     }
 }
